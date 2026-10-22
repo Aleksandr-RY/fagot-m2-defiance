@@ -1,4 +1,4 @@
-# Bassoon-M2 — Multirole ATGM Suite
+# Fagot-M2 — Multirole ATGM Suite
 
 **Game:** Terminator: Dark Fate – Defiance · **Tested on:** v1.08.1173 · **Status:** public beta
 
@@ -6,7 +6,7 @@ English · [Русский](README.ru.md) · [中文](README.zh.md)
 
 > Fan-made mod for offline/single-player use. Not affiliated with, or endorsed by, Cats Who Play or Slitherine Software. TERMINATOR and related marks belong to their respective owners.
 >
-> Public name: **Bassoon-M2**. Project codename (original): **Fagot-M2** (Фагот-М2 — the real-world Soviet ATGM nickname).
+> **Fagot-M2** (Фагот-М2) — the name follows the real-world Soviet ATGM family «Фагот» (AT-4 series, NATO-reported "Fagot"; the word also means "bassoon" — the musical instrument). Chinese-title rendering: 法戈特M2.
 
 ## What this mod adds
 
