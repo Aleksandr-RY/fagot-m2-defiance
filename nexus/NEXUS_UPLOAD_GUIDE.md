@@ -28,6 +28,7 @@ Order (first = page preview):
 
 ## Discipline
 
+- **Standing rule — language order (author's decree, 22 Oct 2026):** EVERY publication from now on — Nexus page updates, GitLab, Yandex Disk, forum posts, release notes, README changes, mod summaries — follows the fixed order: **Русский → 中文 → English**. English always goes last. No exceptions.
 - Never claim testing/verification that hasn't happened. Current honest status: **public beta**, static package audit passed 2026-10-22, behavioral TRACE test pending.
 - The description includes known issues (Takeover residual AI) — keep it there until fixed.
-- All three user-visible languages (RU → ZH → EN; English goes last) live in the single description field, matching the repo's trilingual docs rule. The intro in each language states the mod **replaces the vanilla Javelin ATGM** with the Fagot-M2.
+- All three user-visible languages (RU → ZH → EN per the standing rule) live in the single description field. The intro in each language states the mod **replaces the vanilla Javelin ATGM** with the Fagot-M2.
