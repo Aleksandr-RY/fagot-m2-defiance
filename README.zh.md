@@ -42,7 +42,7 @@
 ## 安装（Windows）
 
 1. 关闭游戏。
-2. 将模组文件夹复制到 `…\Terminator Dark Fate - Defiance\Terminator Dark Fate - Defiance\mods\<模组文件夹>\`。
+2. 将模组文件夹复制到 `…\Terminator Dark Fate - Defiance\mods\<模组文件夹>\`。
 3. 运行 `INSTALL_FINAL.bat`。
 4. 游戏内 → **MODS** 菜单 → 只启用本模组，停用旧版 FagotM2。
 5. 回滚：运行 `RESTORE_REV1.9.1_STABLE.bat`。

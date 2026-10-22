@@ -42,7 +42,7 @@ Mod cover art (`assets/cover_t800_schizo.png`):
 ## Installation (Windows)
 
 1. Close the game.
-2. Copy the mod folder to `…\Terminator Dark Fate - Defiance\Terminator Dark Fate - Defiance\mods\<mod folder>\`.
+2. Copy the mod folder to `…\Terminator Dark Fate - Defiance\mods\<mod folder>\`.
 3. Run `INSTALL_FINAL.bat`.
 4. In-game → **MODS** menu → enable this package; disable any older FagotM2 versions.
 5. Rollback: run `RESTORE_REV1.9.1_STABLE.bat`.

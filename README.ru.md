@@ -42,7 +42,7 @@
 ## Установка (Windows)
 
 1. Закройте игру.
-2. Скопируйте папку мода в `…\Terminator Dark Fate - Defiance\Terminator Dark Fate - Defiance\mods\<папка мода>\`.
+2. Скопируйте папку мода в `…\Terminator Dark Fate - Defiance\mods\<папка мода>\`.
 3. Запустите `INSTALL_FINAL.bat`.
 4. В игре → меню **MODS** → включите этот пакет; отключите старые версии FagotM2.
 5. Откат: запустите `RESTORE_REV1.9.1_STABLE.bat`.
