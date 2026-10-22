@@ -36,6 +36,7 @@ Mod cover art (`assets/cover_t800_schizo.png`):
 ## Compatibility
 
 - Game build **1.08.1173** (tested). Newer patches may change PAK contents — re-run the package audit before trusting it.
+- **Working beta:** bugs exist, but the mod is functional. Quick check in Skirmish: pick the **Bridges** map, set the opponent to **Legion**, deploy your ATGM teams and test all four fire modes.
 - Works in the single-player campaign, Skirmish, and the DLCs (We Are Legion / Uprising); DLC rows are generated from your installed PAKs at install time.
 
 ## Installation (Windows)
