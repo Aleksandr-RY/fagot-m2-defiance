@@ -10,7 +10,7 @@ English · [Русский](README.ru.md) · [中文](README.zh.md)
 
 ## What this mod adds
 
-Three special ammunition types for the ATGM launcher (Javelin / **Fagot-M2**, Фагот — real-world Soviet ATGM nickname), plus the stock rocket:
+This mod **replaces the vanilla Javelin ATGM with the Fagot-M2 multirole ATGM suite** («Фагот» — real-world Soviet ATGM nickname). It adds three special ammunition types, plus the stock rocket — four selectable fire modes total:
 
 | Icon | Mode | Effect |
 |---|---|---|
