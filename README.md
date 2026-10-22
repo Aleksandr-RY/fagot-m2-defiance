@@ -1,10 +1,12 @@
-# Fagot-M2 — Multirole ATGM Suite
+# Bassoon-M2 — Multirole ATGM Suite
 
-**Game:** Terminator: Dark Fate – Defiance · **Tested on:** v1.08.1173 · **Status:** WIP (internal builds)
+**Game:** Terminator: Dark Fate – Defiance · **Tested on:** v1.08.1173 · **Status:** public beta
 
 English · [Русский](README.ru.md) · [中文](README.zh.md)
 
 > Fan-made mod for offline/single-player use. Not affiliated with, or endorsed by, Cats Who Play or Slitherine Software. TERMINATOR and related marks belong to their respective owners.
+>
+> Public name: **Bassoon-M2**. Project codename (original): **Fagot-M2** (Фагот-М2 — the real-world Soviet ATGM nickname).
 
 ## What this mod adds
 
@@ -62,7 +64,11 @@ See [CHANGELOG.md](CHANGELOG.md) and [docs](docs/ARCHITECTURE.md).
 
 ## License
 
-To be decided (proposal: **CC BY-NC-SA 4.0**; no multiplayer use; provided as-is, without warranty).
+**CC BY-SA 4.0** (Creative Commons Attribution-ShareAlike 4.0 International).
+
+- You may share, modify and redistribute for any purpose — including other mods and mod packs — as long as you **credit the Fagot-M2 project author** (the original mod creator) and keep derivatives under the same license.
+- Provided "as is", without warranty of any kind. Single-player/offline use only.
+- Full legal text: core/LICENSE or <https://creativecommons.org/licenses/by-sa/4.0/legalcode>
 
 ## Credits
 
