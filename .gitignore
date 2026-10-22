@@ -1,0 +1,9 @@
+# Binaries ship via GitHub Releases, not git (hash-verified ZIPs)
+releases/
+*.zip
+*.7z
+*.log
+
+# OS noise
+Thumbs.db
+desktop.ini
