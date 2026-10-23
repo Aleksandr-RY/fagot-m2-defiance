@@ -1,0 +1,62 @@
+# КАРАНТИН NEXUS — ДНЕВНИК ДЕНЬ 2 (23 окт 2026, вечер)
+
+## Главные факты дня
+1. Статья article/117 перечитана: разблокировка = только модератор. Письмо в support@ уже в очереди.
+   НЕ УДАЛЯТЬ файлы. НЕ enviar повторные версии до вердикта.
+2. Владельческий вид страницы (юзер залогинился) показал подсказку Nexus:
+   «To get this file reviewed, email support@nexusmods.com. If your mod contains compiled code,
+   include a link to the source code (on GitHub) and the steps to build it.»
+   У нас есть GitHub репо (XML/scripts/docs) — НО исходники патча DLL лежат на ДОМАШНЕМ ПК
+   (STATE.md), в репо их нет. Для сильного ответа модератору нужно залить DLL-исходники в repo.
+3. Сайдбар мода: «Virus scan: Some suspicious files» — VT-скан будущего ZIP нашёл подозрительные ВНУТРЕННИЕ файлы.
+   Ссылки VT (из DOM,hashed по ZIP):
+   - файл «TRACE V2» (20 файлов в манифесте): https://www.virustotal.com/gui/file/f2d6cda7d68cbcd01dc55ed5ff5797083145270a387caf0617654bc207399002/detection
+   - файл «public beta» (25 файлов в манифесте): https://www.virustotal.com/gui/file/1196b15cf841f5f2fc615a4653ebddcbac15c076930cbfb0c3bee2a9018e08c1/detection
+   ИЗ ЕЖЕ ВЧЕРАШНЕГО ОШИБОЧНОГО ПОЛА — сопоставление хэшей уточнено по манифестам.
+4. ПРИЧИНА #1 найдена в контенте: `PREPARE_DLC_AND_RU_NAMES.ps1` содержит ЗАПЕЧЁН ПАРОЛЬ PAK
+   (строка 41). Не печатаем значение нигде. Публично выкладывать скрипт с паролем = риск и для
+   карантин-сканнера, и для модерации. CLEAN-пакет вообще без скриптов → проблема снята.
+5. Причина #2: INSTALL_FINAL.bat вызывает `powershell -ExecutionPolicy Bypass` — классический
+   AV-триггер. Плюс 7 файлов .bat/.ps1 в архиве = категория «Executables and similar».
+6. Сессия харнеса не держит VT (ERR_CONNECTION_CLOSED — прокси). VT открывается только юзером
+   вручную → просим скрины отчётов по двум ссылкам.
+
+## Сопоставление загрузок и манифестов (уточнено!)
+- Страница FILES row 1 «TRACE V2» (23 Oct 12:32AM): manifest 3ec4849d…, ZIP SHA f2d6cda7…, 20 файлов.
+- Row 2 «public beta» (22 Oct 3:31PM): manifest fea39665…, ZIP SHA 1196b15c…, 25 файлов.
+- Локальный N:\_Upload\Fagot-M2\FagotM2_FINAL_4MODES_REV1.9.4_TRACE_V2.zip = SHA 1196b15c… =
+  25-файловая сборка (= опубликованная как «public beta»). Вчера сводка считала её «TRACE V2» —
+  человеческая путаница, протестировано манифестами.
+- Old files (12:24AM) — первая попытка той же сборки, не трогаем.
+
+## Содержимое скриптов (для модератора/письма — иная существенная позиция: честно описано)
+- INSTALL_FINAL.bat — оркестратор: запускает 2 PowerShell-скрипта, пауза при ошибках.
+- PREPARE_DLC_AND_RU_NAMES.ps1 — ищет 7z, СПРАШИВАЕТ/качает PAK-пароль (опущено: НЕ публикуем
+  значение), извлекает ТЕКУЩИЕ XML из установленной игры (dlc Legion/Resistance, ru locale),
+  дописывает Фагот-М2. Выход — XML внутри папки мода; официальные PAK не меняются, сети нет.
+- INSTALL_LOGIC_REV1.9.4_TRACE_V2.ps1 — SHA256-контроль: бэкап логики, замена Только если текущий
+  logic.dll == ревизия STABLE 29eb…6044,posta после копирования — проверка нового файла f65934…afb9.
+- RESTORE_REV1.9.1_STABLE.ps1 — откат на верифицированную 1.9.1 (Reference DLL в пакете).
+- RESTORE_ORIGINAL_DLL.bat — восстановление ванильного бэкапа из bin\.
+- CLEAR/COLLECT_TRACE_LOG.bat — работа с bin\FagotM2_debug.log.
+
+## REPACK ГОТОВ (не загружен — ждём вердикта! / либо решаем форсированно)
+`terminator-mod\uploads\FagotM2_FINAL_4MODES_REV1.9.4_CLEAN_MANUAL.zip`
+- SHA256: cb3c2e0d446287b1c2285f494cbc8b438000775b3e2463e09092999595be1517, 3 786 868 B
+- Состав: basis/(5 xml + predefinedSaves/globalMap.sav), dlc/Resistance override,
+  localization/ru, ОДНА DLL (logic_FagotM2_REV1.9.4_TRACE_V2.dll), mod.json (без BOM),
+  README_CLEAN.txt (РУС → 中文 → EN: ручная установка + certutil SHA-контроль + rollback).
+- НЕТ ни одного .bat/.ps1/.exe, НЕТ вложенных архивов, НЕТ пароля PAK, НЕТ REFERENCE-дубля.
+- Риск-остаток: 1 DLL 8.9MB — если VT уже «окрасил» сам DLL, CLEAN не спасёт; скрины VT решат.
+- Сборка по мод-папке: FagotM2_FINAL_4MODES_REV1.9.4_CLEAN.
+
+## Чувствительность
+- workdir_quarantine (распакованный ZIP с PS1, содержащим PAK-пароль) ВЫНЕСЕН из репо:
+  «Проект по умолчанию\quarantine_work\». В git не попадёт.
+
+## Ждём от юзера
+- 2 скрина VT по ссылкам выше (движки + какие внутренние файлы flagged).
+- Решение: залить DLL-исходники с HOME ПК в GitHub (сильный аргумент для модератора).
+
+## Мой готовый материал
+- nexus\SUPPORT_REPLY_2026-10-23.md — черновик ответа в саппорт-тред (RU + EN).
