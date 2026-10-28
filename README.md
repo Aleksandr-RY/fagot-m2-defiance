@@ -58,7 +58,7 @@
 - Установщик прерывается с «hash mismatch» → текущий `logic.dll` не является проверенной базой. Сначала восстановите базу (см. `docs/RELEASE_FILES.md`).
 - Тексты вида `[Resource 'fagot_…' not found]` → перезапустите установку, чтобы применилась русская локализация.
 
-## Дорожная карта
+## Логгер (диагностика)  Логгер встроен в байт-патч. Лог лежит рядом с игрой: `…\Terminator Dark Fate - Defiance\bin\FagotM2_debug.log`. Пишется только при выстрелах режимами мода — строки вида `oldTeam/newTeam/VERIFY_IMMEDIATE`. Никаких персональных данных, файл можно свободно удалять. При баг-репорте приложите лог — это сильно ускоряет фикс.   ## Дорожная карта
 
 - [ ] Починить «остаточный AI» у части захваченных юнитов (Takeover) — диагностическая сборка `REV1.9.4 TRACE V2` на тесте
 - [ ] Балансировка (перезарядка, доступность) для «Схватки»
@@ -135,7 +135,7 @@
 - 安装器提示哈希不匹配 → 当前 `logic.dll` 不是已验证的基线。请先恢复基线（见 `docs/RELEASE_FILES.md`）。
 - 出现 `[Resource 'fagot_…' not found]` → 重新运行安装器以应用俄语本地化覆盖。
 
-## 路线图
+## 日志（诊断）  日志功能内置于字节补丁中。日志文件位于游戏 exe 旁：`…\Terminator Dark Fate - Defiance\bin\FagotM2_debug.log`。仅在使用模组射击模式时写入（oldTeam/newTeam/VERIFY_IMMEDIATE 等行）。不含任何个人数据，可随时删除。提交 Bug 时请附上日志，可大幅加快修复。   ## 路线图
 
 - [ ] 修复部分被接管单位的「残留自主行动」（Takeover）——诊断版本 `REV1.9.4 TRACE V2` 正在测试
 - [ ] 遭遇战平衡性调整（冷却、可用性）
@@ -212,7 +212,7 @@ Mod folders: `FagotM2_2.0.0_1.0.8_GOG` (game 1.08.1173) and `FagotM2_2.0.0_1.0.9
 - Installer aborts with hash mismatch → your `logic.dll` is not the verified baseline. Restore the baseline first (see `docs/RELEASE_FILES.md`).
 - Locale strings show as `[Resource 'fagot_…' not found]` → re-run the installer so the Russian locale override applies.
 
-## Roadmap
+## Logger (diagnostics)  Built into the byte patch. The log lives next to the game exe: `…\Terminator Dark Fate - Defiance\bin\FagotM2_debug.log`. It is written only when the mod fire modes are used — lines like `oldTeam/newTeam/VERIFY_IMMEDIATE`. No personal data; safe to delete. Attach it to a bug report — it speeds up the fix a lot.   ## Roadmap
 
 - [ ] Fix "residual AI" on some captured units (Takeover) — diagnostic build `REV1.9.4 TRACE V2` under testing
 - [ ] Balance pass (cooldowns, availability) for Skirmish
