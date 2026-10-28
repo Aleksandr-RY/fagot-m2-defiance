@@ -1,31 +1,48 @@
-# NEXUS_DESCRIPTION.bbcode
+# NEXUS_DESCRIPTION.bbcode — v2.0.0 (NEXUS CLEAN edition)
 # Single-file Nexus "Description" content — 3 languages in one field (RU → ZH → EN).
 # BBCode subset used: b, i, u, size, color, url, list (safe on Nexus).
 # The [img] of the cover is inserted AFTER images are uploaded on the Files/Images tab.
+# NOTE: this edition = NO scripts in the archive (Nexus rules). The engine part
+# (byte patch of logic.dll) is a separate step via open-source installers on GitHub.
 
 [size=4][b]Фагот-М2 — Многоцелевой ПТРК (русская версия)[/b][/size]
 
-Фанатский мод [b]заменяет штатный Джавелин (Javelin) на многоцелевой ПТРК «Фагот-М2»[/b]: добавляет три специальных боеприпаса — [b]ЭМИ[/b], [b]СГИ («Шизо» — Neural Breach)[/b] и [b]Кибер-взлом («Захват» — Takeover)[/b]. Плюс штатная ракета — итого 4 режима огня. Джавелин заменяется везде, где доступен ПТРК (кампания, «Схватка», DLC).
+Фанатский мод [b]заменяет штатный Джавелин (Javelin) на многоцелевой ПТРК «Фагот-М2»[/b] и добавляет три специальных боеприпаса — [b]ЭМИ[/b], [b]СГИ («Шизо» — Neural Breach)[/b] и [b]Кибер-взлом («Захват» — Takeover)[/b]. Плюс штатная ракета — итого 4 режима огня. Джавелин заменяется везде, где доступен ПТРК (кампания, «Схватка», DLC).
 
-[b]Режимы:[/b]
+[b]Режимы (требуют движковый патч — см. «Установка», шаг 2):[/b]
 [list]
 [*]🚀 Штатная ракета — обычный ПТУР, поведение ванильное.
-[*]🔵 ЭМИ — приостанавливает цель на ~45 с; смена команды не происходит.
+[*]🔵 ЭМИ — приостанавливает цель на ~45 с, без смены команды.
 [*]🟡 СГИ («Шизо») — захваченная техника становится союзной [i]автономной[/i] единицей (жёлтые).
 [*]🟢 Кибер-взлом («Захват») — захваченная техника переходит под [i]прямое управление игрока[/i] (зелёные).
 [/list]
 
-[b]Как работает (кратко):[/b] XML-оверлеи добавляют боеприпасы и три профиля эффектов; режим диспетчеризуется по сигнатуре life_time (0.8 / 0.9 / 1.0), общий радиус 30 м. Патченный logic.dll выполняет смену команды в момент попадания; в TRACE-сборках логируются только захваченные «Захватом» цели. Глобальных хуков ИИ нет. Установщик проверяет SHA256 вашего logic.dll (базовая линия 29EB…6044), делает верифицированную резервную копию и позволяет откат одной командой (RESTORE_REV1.9.1_STABLE.bat).
+[b]Как это устроено:[/b] мод двухслойный.
+[list]
+[*][b]Слой данных (этот архив):[/b] XML-оверлеи — новые боеприпасы, три профиля эффектов (сигнатура life_time 0.8 / 0.9 / 1.0, общий радиус 30 м), русские названия, строки DLC. Ставится вручную, в архиве [b]нет ни одного скрипта или .exe[/b] — по правилам Nexus.
+[*][b]Слой механики (шаг 2, по ссылке на GitHub):[/b] байт-патч вашего собственного bin\logic.dll — хуки смены команды в момент попадания. Готовый файл игры не распространяется (правила Nexus и авторские права), установщики опубликованы [b]открытыми исходниками[/b]: скрипт проверяет SHA256 вашего стока, делает бэкап, патчит на месте и откатывается одной командой.
+[/list]
 
-[b]Требования:[/b] игра версии [b]1.08.1173[/b] (проверено); только одиночная игра / оффлайн; кампания, «Схватка» и DLC (We Are Legion / Uprising — строки DLC генерируются из ваших PAK при установке).
+[b]Требования:[/b] TERMINATOR: Dark Fate — Defiance, [b]GOG[/b] версии [b]1.08.1173[/b] или [b]1.09.1223[/b] (обе проверены в игре); только одиночная игра / оффлайн. Для Steam-версии данные мода совместимы, но не тестировались — движковый патч собирается под GOG-сборку.
 
-[b]Установка (Windows):[/b] закрыть игру → скопировать папку мода в …\Terminator Dark Fate - Defiance\mods\<папка мода>\ → запустить INSTALL_FINAL.bat → в игре: меню MODS, включить пакет (старые версии FagotM2 отключить). Откат — RESTORE_REV1.9.1_STABLE.bat.
+[b]Установка (Windows):[/b]
+[list]
+[*]1. Закройте игру → скопируйте папку мода из архива в …\Terminator Dark Fate - Defiance\mods\ → в игре: меню MODS, включите пакет.
+[*]2. Полная механика (4 режима): скачайте установщик с [url=https://github.com/Aleksandr-RY/fagot-m2-defiance]GitHub — fagot-m2-defiance[/url] (папка installers/), запустите INSTALL-батник. Он проверит SHA256 вашего стока, сделает бэкап и откатится сам при любом несовпадении.
+[/list]
 
-[b]Статус: рабочая бета[/b] — баги есть, но мод работает. Быстрая самопроверка в «Схватке» (Skirmish): выберите карту «Мосты», оппонент — Легион (Legion), выставьте юнитов с ПТРК и проверьте все 4 режима огня.
+[b]Статус: рабочая бета[/b] — баги есть, но мод работает. Быстрая самопроверка в «Схватке»: карта «Мосты», оппонент — Легион, юниты с ПТРК, проверить все 4 режима.
 
-[b]Известные проблемы (публичная бета):[/b] у части захваченных «Захватом» машин сохраняется остаточный ИИ-контроллер (роботы/пауки могут действовать автономно при смешанном управлении); баланс для «Схватки» не финализирован. Текущая сборка REV1.9.4 TRACE V2 пишет диагностику захваченных целей в bin\FagotM2_debug.log — лог остаётся на вашем ПК, приложив его к баг-репорту, вы сильно поможете фиксу.
+[b]Известные проблемы (публичная бета, не скрываем):[/b]
+[list]
+[*]у части захваченных машин сохраняется остаточный ИИ-контроллер (роботы/пауки могут действовать автономно при смешанном управлении);
+[*]«Шизо» перекрашивает и [i]свои[/i] юниты в зоне разрыва — штатная логика «промывки мозгов», оставлено как фича;
+[*]иконка ПТРК заменяется стандартной (файла иконки в данных игры нет);
+[*]GOG 1.9 + движковый патч: после активной стрельбы режимами возможен редкий подвис при выходе из игры (гонка, расследуется; выход без выстрелов — чистый).
+[/list]
+Диагностика пишется в bin\FagotM2_debug.log (лог остаётся на вашем ПК) — приложив его к баг-репорту, вы сильно поможете фиксу.
 
-[b]Лицензия:[/b] CC BY-SA 4.0 — свободное распространение и модификация с обязательным указанием авторства на создателя проекта Фагот-М2; производные — под той же лицензией. «Как есть», без гарантий.
+[b]Лицензия:[/b] CC BY-SA 4.0 — свободное распространение и модификация с обязательным указанием авторства создателя проекта Фагот-М2; производные — под той же лицензией. «Как есть», без гарантий.
 
 Псевдоним «Фагот» — реальное прозвище советского ПТРК семейства АТ-4 (по классификации НАТО). Не аффилировано с Cats Who Play или Slitherine. TERMINATOR и связанные знаки принадлежат правообладателям. Исходники и документация: [url=https://github.com/Aleksandr-RY/fagot-m2-defiance]GitHub — fagot-m2-defiance[/url].
 
@@ -33,53 +50,54 @@
 
 [size=4][b]法戈特M2 — 多用途反坦克导弹套件（中文版）[/b][/size]
 
-本模组 [b]将原版 Javelin（标枪）反坦克导弹发射器替换为法戈特M2 多用途导弹套件[/b]：新增三种特殊弹药 — [b]电磁脉冲（EMP）[/b]、[b]神经入侵（Neural Breach，绰号 Schizo）[/b] 与 [b]网络接管（Cyber Hack，绰号 Takeover）[/b]，加上原版火箭弹，共四种射击模式。在所有可使用反坦克导弹发射器的场合（战役、Skirmish、DLC），原版标枪均被替换。
+本模组 [b]将原版 Javelin（标枪）反坦克导弹发射器替换为法戈特M2 多用途导弹套件[/b]：新增三种特殊弹药 — [b]电磁脉冲（EMP）[/b]、[b]神经入侵（Neural Breach，绰号 Schizo）[/b] 与 [b]网络接管（Cyber Hack，绰号 Takeover）[/b]，加上原版火箭弹，共四种射击模式。
 
-[b]模式说明：[/b]
-[list]
-[*]🚀 原版火箭弹 — 普通反坦克导弹，保持原版行为。
-[*]🔵 EMP — 使目标瘫痪约 45 秒；不改变所属阵营。
-[*]🟡 神经入侵 — 被捕获的目标变为友方 [i]自主[/i]单位（友军配色阵营）。
-[*]🟢 网络接管 — 被捕获的目标直接由 [i]玩家操控[/i]（玩家阵营）。
-[/list]
+[b]模式说明（需要引擎补丁，见「安装」第 2 步）：[/b]原版火箭弹保持原版行为；EMP 使目标瘫痪约 45 秒；神经入侵将目标变为友方 [i]自主[/i]单位；网络接管将目标交给 [i]玩家直接操控[/i]。
 
-[b]工作原理（简述）：[/b]内容层由 SpreadsheetML (.xml) 覆盖文件加入弹药条目与三种效果配置，发射器按 life_time 特征值（0.8 / 0.9 / 1.0）分发模式，共用 30 米效果半径；运行层由打过补丁的 logic.dll 在命中时执行阵营切换，TRACE 构建仅记录被「网络接管」捕获目标的诊断字段，[b]不使用任何全局 AI 钩子[/b]。安装器会校验 logic.dll 的 SHA256（基线 29EB…6044），先做已验证的备份，复制后再复核；一条命令即可回滚（RESTORE_REV1.9.1_STABLE.bat）。
+[b]结构：[/b]模组分两层。本压缩包为 [b]数据层[/b]（XML 覆盖：弹药、三种效果配置、中文名称、DLC 行），按 Nexus 规则 [b]不含任何脚本或可执行文件[/b]，手动安装即可；[b]机制层[/b]（logic.dll 字节补丁，命中时切换阵营）请从 [url=https://github.com/Aleksandr-RY/fagot-m2-defiance]GitHub[/url] 下载开源安装脚本（校验原版 SHA256、自动备份、一键回滚）。
 
-[b]环境要求：[/b]游戏版本 [b]1.08.1173[/b]（已测试）；仅单人/离线（战役、Skirmish 及 DLC：We Are Legion / Uprising，DLC 条目在安装时根据已装 PAK 生成）。
+[b]环境要求：[/b]GOG 版游戏 [b]1.08.1173 / 1.09.1223[/b]（均已实测）；仅单人/离线。Steam 版数据兼容但未测试。
 
-[b]安装（Windows）：[/b]关闭游戏 → 将模组文件夹复制到 …\Terminator Dark Fate - Defiance\mods\<模组文件夹>\ → 运行 INSTALL_FINAL.bat → 游戏内 MODS 菜单启用本包，并停用旧版 FagotM2。
-
-[b]状态：可玩的公测版[/b] — 存在一些 Bug，但模组可用。快速自测（Skirmish 遭遇战）：选择「桥梁（Bridges）」地图，对手设为 Legion（军团），部署携带反坦克导弹的部队，依次验证 4 种射击模式。
-
-[b]已知问题（公开测试版）：[/b]部分被「网络接管」的单位会保留残留 AI 控制器（机器人/蜘蛛型机甲可能在混合控制下自主行动）；Skirmish 平衡尚未定稿。当前构建 REV1.9.4 TRACE V2 会将捕获目标诊断写入 bin\FagotM2_debug.log（仅存于本机）；提交 Bug 时附上日志可大幅加速修复。
-
-[b]许可：[/b]CC BY-SA 4.0 — 可自由共享、修改与再分发（含其他模组及模组合集），但必须注明 Fagot-M2 项目原作者，且衍生作品须采用相同许可。按「现状」提供，不附带任何担保。
-
-注：法戈特（Fagot）是苏联 AT-4 反坦克导弹家族的真实绰号。本模组与 Cats Who Play、Slitherine 无任何关联；TERMINATOR 及相关商标归其权利人所有。源码与文档：[url=https://github.com/Aleksandr-RY/fagot-m2-defiance]GitHub — fagot-m2-defiance[/url]。
+[b]状态：可玩的公测版。[/b]已知问题：部分被接管的单位保留残留 AI 控制器；「神经入侵」会误染己方单位（保留为特性）；武器图标替换为默认图标；GOG 1.9 + 引擎补丁在开火后退出游戏时偶发卡住（调查中）。许可：CC BY-SA 4.0，作者：LeKks。
 
 ───────────────────────────────────────────
 
 [size=4][b]Fagot-M2 — Multirole ATGM Suite (English)[/b][/size]
 
-This fan mod [b]replaces the vanilla Javelin ATGM with the Fagot-M2 multirole ATGM suite[/b]: it adds three special ammunition types — [b]EMP[/b], [b]Neural Breach («Schizo»)[/b] and [b]Cyber Hack («Takeover»)[/b]. Plus the stock rocket, for four selectable fire modes total. The Javelin is replaced everywhere the ATGM launcher is available (campaign, Skirmish, DLCs).
+This fan mod [b]replaces the vanilla Javelin ATGM with the Fagot-M2 multirole ATGM suite[/b]: it adds three special ammunition types — [b]EMP[/b], [b]Neural Breach («Schizo»)[/b] and [b]Cyber Hack («Takeover»)[/b]. Plus the stock rocket, for four selectable fire modes total.
 
-[b]Modes:[/b]
+[b]Modes (require the engine patch — see "Installation", step 2):[/b]
 [list]
 [*]🚀 [b]Stock ATGM[/b] — regular anti-tank rocket, untouched vanilla behavior.
-[*]🔵 [b]EMP[/b] — suspends the target for ~45 s. No team change, no damage to the logic layer.
+[*]🔵 [b]EMP[/b] — suspends the target for ~45 s. No team change.
 [*]🟡 [b]Neural Breach («Schizo»)[/b] — the captured target becomes an allied [i]autonomous[/i] unit (ally-colored team).
-[*]🟢 [b]Cyber Hack («Takeover»)[/b] — the captured target comes under [i]direct player control[/i] (player team).
+[*]🟢 [b]Cyber Hack («Takeover»)[b] — the captured target comes under [i]direct player control[/i] (player team).
 [/list]
 
-[b]How it works (short version):[/b] SpreadsheetML (.xml) overrides add the ammo rows and three effect profiles; the launcher mode is dispatched by the life_time signature (0.8 / 0.9 / 1.0) with a shared 30 m effect radius. A patched game logic.dll performs the team switch at projectile impact; in TRACE builds, only Takeover-captured targets are logged. No global AI hooks. The installer verifies your logic.dll SHA256 (baseline 29EB…6044), creates a verified backup first and re-verifies after copying; one-command rollback (RESTORE_REV1.9.1_STABLE.bat).
+[b]How it works:[/b] the mod has two layers.
+[list]
+[*][b]Data layer (this archive):[/b] XML overrides — new ammo rows, three effect profiles (life_time signature 0.8 / 0.9 / 1.0, shared 30 m radius), Russian names, DLC rows. Manual install; the archive contains [b]no scripts and no executables[/b] (Nexus rules).
+[*][b]Mechanics layer (step 2, via the GitHub link):[/b] a byte patch of your own bin\logic.dll — team-switch hooks at projectile impact. The ready game file is not redistributed (Nexus rules & copyright); the installers are published [b]as open source[/b]: the script verifies your stock SHA256, backs it up, patches in place and reverts in one command.
+[/list]
 
-[b]Requirements:[/b] game build [b]1.08.1173[/b] (tested); single-player / offline only; campaign, Skirmish and DLCs (We Are Legion / Uprising — DLC rows are generated from your installed PAKs at install time).
+[b]Requirements:[/b] TERMINATOR: Dark Fate — Defiance, [b]GOG[/b] build [b]1.08.1173[/b] or [b]1.09.1223[/b] (both tested in-game); single-player / offline only. Steam: mod data is compatible but untested; the engine patch targets the GOG builds.
 
-[b]Installation (Windows):[/b] close the game → copy the mod folder to …\Terminator Dark Fate - Defiance\mods\<mod folder>\ → run INSTALL_FINAL.bat → in-game: MODS menu, enable this package and disable any older FagotM2 versions. Rollback: RESTORE_REV1.9.1_STABLE.bat.
+[b]Installation (Windows):[/b]
+[list]
+[*]1. Close the game → copy the mod folder from the archive into …\Terminator Dark Fate - Defiance\mods\ → in-game: MODS menu, enable the package.
+[*]2. Full mechanics (4 modes): grab the installer from [url=https://github.com/Aleksandr-RY/fagot-m2-defiance]GitHub — fagot-m2-defiance[/url] (installers/ folder) and run the INSTALL bat. It verifies your stock SHA256, backs it up and reverts automatically on any mismatch.
+[/list]
 
-[b]Status: working beta[/b] — bugs exist, but the mod is functional. Quick self-check in Skirmish: pick the Bridges («Мосты») map, set the opponent to Legion, deploy your ATGM teams and test all four fire modes.
+[b]Status: working beta[/b] — bugs exist, but the mod is functional. Quick self-check in Skirmish: Bridges map, opponent Legion, deploy ATGM teams, test all four fire modes.
 
-[b]Known issues (public beta):[/b] some Takeover-captured units keep a residual AI controller (robots/spiders may act autonomously under player+AI mixed control); Skirmish balance is not finalized. The current build REV1.9.4 TRACE V2 logs captured-target diagnostics to bin\FagotM2_debug.log (stays on your PC) — attaching it to a bug report speeds up the fix a lot.
+[b]Known issues (public beta, not hidden):[/b]
+[list]
+[*]some captured units keep a residual AI controller (robots/spiders may act autonomously under player+AI mixed control);
+[*]«Schizo» also repaints [i]own[/i] units inside the blast — vanilla brainwash logic, kept as a feature;
+[*]the launcher icon falls back to the default one (no icon asset in the game data);
+[*]GOG 1.9 + engine patch: a rare hang on game exit after active fire-mode use (a race, under investigation; quitting without firing is clean).
+[/list]
+Diagnostics are written to bin\FagotM2_debug.log (stays on your PC) — attaching it to a bug report speeds up the fix a lot.
 
 [b]License:[/b] CC BY-SA 4.0 — share, modify and redistribute freely (including other mods and mod packs) as long as you credit the Fagot-M2 project author and keep derivatives under the same license. Provided "as is", without warranty of any kind.
 

@@ -37,17 +37,21 @@
 
 ## Совместимость
 
-- Сборка игры **1.08.1173** (тестировалась). Новые патчи могут менять содержимое PAK — перед установкой перепроверяйте пакет.
+- Сборки игры **GOG 1.08.1173** и **GOG 1.09.1223** (обе протестированы в игре). Steam-версия: данные мода совместимы, движковый патч собран под GOG-сборки. Новые патчи могут менять содержимое PAK — перед установкой перепроверяйте пакет.
 - **Рабочая бета:** баги есть, но мод работает. Быстрая самопроверка в «Схватке»: карта «Мосты», оппонент — Легион (Legion), выставьте юнитов с ПТРК и проверьте все 4 режима огня.
 - Одиночная кампания, «Схватка», DLC (We Are Legion / Uprising); строки DLC генерируются установщиком из ваших установленных PAK.
 
 ## Установка (Windows)
 
+Папки мода: `FagotM2_2.0.0_1.0.8_GOG` (игра 1.08.1173) и `FagotM2_2.0.0_1.0.9_GOG` (GOG 1.09.1223).
+
 1. Закройте игру.
-2. Скопируйте папку мода в `…\Terminator Dark Fate - Defiance\mods\<папка мода>\`.
-3. Запустите `INSTALL_FINAL.bat`.
-4. В игре → меню **MODS** → включите этот пакет; отключите старые версии FagotM2.
-5. Откат: запустите `RESTORE_REV1.9.1_STABLE.bat`.
+2. Скопируйте папку мода в `…\Terminator Dark Fate - Defiance\mods\`.
+3. Запустите `INSTALL_v2.0.0.bat` (1.08) или `INSTALL_v2.0.0_GOG19.bat` (1.9) — он выполнит XML-фазу и байт-патч `bin\logic.dll` на месте.
+4. В игре → меню **MODS** → включите пакет; отключите старые версии FagotM2.
+5. Откат: `RESTORE_ORIGINAL_DLL.bat` / `RESTORE_BASE_DLL.bat` (1.08) или `RESTORE_GOG19.bat` (1.9).
+
+**Что нужно (полный список):** Windows 10/11 x64; PowerShell 5.1 — встроен в Windows, ничего ставить не надо; **7-Zip** — только для XML-фазы (распаковка PAK); интернет — только чтобы скачать пакет. Других зависимостей нет: правится ваш собственный файл игры на месте, готовые бинари не используются.
 
 ## Известные проблемы
 
@@ -110,17 +114,21 @@
 
 ## 兼容性
 
-- 已在游戏版本 **1.08.1173** 上测试。新补丁可能改变 PAK 内容——使用前请重新校验包。
+- 已在 GOG 版 **1.08.1173** 与 **1.09.1223** 上测试（均实测）。Steam 版数据兼容，引擎补丁针对 GOG 构建。新补丁可能改变 PAK 内容——使用前请重新校验包。
 - **可玩的公测版：** 存在一些 Bug，但模组可用。快速自测（遭遇战）：选择「桥梁（Bridges）」地图，对手设为 Legion（军团），部署反坦克部队并依次验证 4 种模式。
 - 支持单人战役、遭遇战（Skirmish）以及两个 DLC（We Are Legion / Uprising）；DLC 数据在安装时由已安装的 PAK 生成。
 
 ## 安装（Windows）
 
+模组文件夹：`FagotM2_2.0.0_1.0.8_GOG`（游戏 1.08.1173）与 `FagotM2_2.0.0_1.0.9_GOG`（GOG 1.09.1223）。
+
 1. 关闭游戏。
-2. 将模组文件夹复制到 `…\Terminator Dark Fate - Defiance\mods\<模组文件夹>\`。
-3. 运行 `INSTALL_FINAL.bat`。
-4. 游戏内 → **MODS** 菜单 → 只启用本模组，停用旧版 FagotM2。
-5. 回滚：运行 `RESTORE_REV1.9.1_STABLE.bat`。
+2. 将模组文件夹复制到 `…\Terminator Dark Fate - Defiance\mods\`。
+3. 运行 `INSTALL_v2.0.0.bat`（1.08）或 `INSTALL_v2.0.0_GOG19.bat`（1.9）——完成 XML 阶段并对 `bin\logic.dll` 原地字节补丁。
+4. 游戏内 → **MODS** 菜单 → 启用本模组，停用旧版 FagotM2。
+5. 回滚：`RESTORE_ORIGINAL_DLL.bat` / `RESTORE_BASE_DLL.bat`（1.08）或 `RESTORE_GOG19.bat`（1.9）。
+
+**所需环境（完整清单）：** Windows 10/11 x64；PowerShell 5.1（系统自带，无需安装）；**7-Zip**（仅 XML 阶段解包 PAK 需要）；联网仅用于下载本包。无其他依赖：只修改你自己的游戏文件，不分发任何二进制。
 
 ## 常见问题
 
@@ -183,17 +191,21 @@ This mod **replaces the vanilla Javelin ATGM with the Fagot-M2 multirole ATGM su
 
 ## Compatibility
 
-- Game build **1.08.1173** (tested). Newer patches may change PAK contents — re-run the package audit before trusting it.
+- Game builds **GOG 1.08.1173** and **GOG 1.09.1223** (both tested in-game). Steam: mod data compatible, engine patch targets the GOG builds. Newer patches may change PAK contents — re-run the package audit before trusting it.
 - **Working beta:** bugs exist, but the mod is functional. Quick check in Skirmish: pick the **Bridges** map, set the opponent to **Legion**, deploy your ATGM teams and test all four fire modes.
 - Works in the single-player campaign, Skirmish, and the DLCs (We Are Legion / Uprising); DLC rows are generated from your installed PAKs at install time.
 
 ## Installation (Windows)
 
+Mod folders: `FagotM2_2.0.0_1.0.8_GOG` (game 1.08.1173) and `FagotM2_2.0.0_1.0.9_GOG` (GOG 1.09.1223).
+
 1. Close the game.
-2. Copy the mod folder to `…\Terminator Dark Fate - Defiance\mods\<mod folder>\`.
-3. Run `INSTALL_FINAL.bat`.
+2. Copy the mod folder into `…\Terminator Dark Fate - Defiance\mods\`.
+3. Run `INSTALL_v2.0.0.bat` (1.08) or `INSTALL_v2.0.0_GOG19.bat` (1.9) — it performs the XML phase and the in-place byte patch of `bin\logic.dll`.
 4. In-game → **MODS** menu → enable this package; disable any older FagotM2 versions.
-5. Rollback: run `RESTORE_REV1.9.1_STABLE.bat`.
+5. Rollback: `RESTORE_ORIGINAL_DLL.bat` / `RESTORE_BASE_DLL.bat` (1.08) or `RESTORE_GOG19.bat` (1.9).
+
+**Requirements (full list):** Windows 10/11 x64; PowerShell 5.1 — built into Windows, nothing to install; **7-Zip** — only for the XML phase (PAK extraction); internet — just to download the package. No other dependencies: your own game file is patched in place, no ready-made binaries are used or redistributed.
 
 ## Troubleshooting
 
