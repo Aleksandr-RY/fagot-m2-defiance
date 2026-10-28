@@ -1,0 +1,16 @@
+{
+  "mod_version": "2.0.0",
+  "engine_revision": "REV1.9.2",
+  "engine_basis": "REV1.9.1 GOG19 dry transfer (ca639936...) + vtable range-guard (126 B in cave page, imm 0x8DF000)",
+  "target_game": "Terminator: Dark Fate - Defiance GOG 1.9",
+  "logic_stock_sha256": "da62ed73b43fafa8af0f25fba0501bff641a0cfd1bfb0d3a0b8777a1b0d99271",
+  "logic_final_sha256": "34e2abd21c23bbed6f3a328f090f9832ccd67dbf32908492f6ee2f7010a13f86",
+  "logic_dry191_sha256": "ca63993645348280225c1f0e08749744f247e14d79570ef17cf2e26ccb716eb8",
+  "logic_stock_size": 9253648,
+  "logic_final_size": 9257984,
+  "patch_windows": "8 in-stock windows (65 B) + appended tail 4336 B (full chain); 4 tail guard windows (126 B) for the dry-191 base",
+  "installer": "INSTALL_LOGIC_v2.0.0_GOG19.bat/.ps1 (in-place byte patch, staging + SHA256 verify, no ready-made DLL)",
+  "restore": "RESTORE_GOG19.bat (logic.dll.GOG19_stock.bak / logic.dll.FagotM2_191dry_before_192.bak)",
+  "xml_phase": "done 27.10.2026: PREPARE_XML_v2.0.0_GOG19.ps1 extracts stock species XML from GOG 1.9 PAKs (7-Zip; the 1.08 password works), applies the same profiles as the proven 1.08 PREPARE and writes overrides into the mod folder only (basis + dlc + localization). Idempotent; game PAKs untouched. Anchors verified in 1.9 data: inf_atm, small_emp, inf_javelin.",
+  "proven_on": "v1.08.1173 (identical engine logic; REV1.9.2 user-tested: no Schizo/Intercept crash)"
+}

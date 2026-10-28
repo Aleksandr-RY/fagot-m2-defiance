@@ -1,0 +1,5 @@
+{
+  "name": "Fagot-M2 FINAL 4 Modes v2.0.0",
+  "description": "Fagot-M2 ATGM takeover mod, version 2.0.0 (GOG 1.9 build). Four modes: EMP shutdown, Schizophrenic brainwash (victim -> player ally), Interception (team 0), radius 30. Engine revision REV1.9.2 with the vtable range-guard hotfix proven on v1.08.1173 (no more Schizo/Intercept crash when the victim dies before the reset callback). DLL-level install is an in-place byte patch of bin\\logic.dll - no ready-made DLL in this package. Install: INSTALL_LOGIC_v2.0.0_GOG19.bat. Revert: RESTORE_GOG19.bat.",
+  "icon": "basis/ui/pictures/inventory/wpn_mg_atgm.dds"
+}
