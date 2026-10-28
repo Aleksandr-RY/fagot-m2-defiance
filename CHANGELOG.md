@@ -43,3 +43,11 @@ Facts in this file come from the project technical handoff (`FagotM2_Technical_H
 - Logs the captured Takeover target only: `entityLo/entityVTLo`, `stateLo/stateVTLo`, `p20|p28|p48 (Lo/VT)` — low 32 bits of object/controller pointers and vtables, to compare an obedient vs an autonomous captured unit.
 - No gameplay changes: `global_ai_hooks=false`, EMP/Schizo/Takeover logic unchanged.
 - Package audited 2026-10-22 (`AUDIT_TRACE_V2_2026-10-22.md`): hashes match, installer is hash-gated, XML overrides parse, profiles match the REV1.8 spec.
+
+## v2.0.0 — GOG 1.9 build (2026-10-28, awaiting in-game test)
+
+- Public version unified at **2.0.0** on both game builds; engine revision inside is REV1.9.2 (vtable range-guard, proven crash-free on 1.08).
+- GOG 1.9 = game **1.09.1223 (GOG build 94330)**. Vanilla `logic.dll` SHA256 `da62ed73…` (9 253 648 B) → patched master `34e2abd2…` (9 257 984 B); installer also accepts the dry 1.9.1 base `ca639936…`.
+- XML phase ported to 1.9: `PREPARE_XML_v2.0.0_GOG19.ps1` extracts stock species XML from the game PAKs (ZipCrypto), applies the same profiles as 1.08 (EMP 0.8 / Schizo 0.9 / Takeover 1.0, radius 30, suspension 45), DLC Legion/Resistance/Canada, RU names. Idempotent; game PAKs untouched.
+- Package: `mods\FagotM2_FINAL_4MODES_v2.0.0_GOG19\` — 17 files, no ready-made DLL, byte-patch in place. See `releases/v2.0.0_GOG19/` and `journal/2026-10-28_v2.0.0_GOG19.md`.
+- The 1.08 build stays gold (user-tested, campaign completed).
