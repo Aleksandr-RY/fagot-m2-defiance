@@ -2,26 +2,29 @@
 # Fagot-M2 REV1.9.2 - GOG 1.9 BYTE-PATCH installer (variant B)
 # NO ready-made DLL: this engine edits bin\logic.dll in place.
 # Accepted bases (SHA256):
-#   da62ed73...  stock GOG 1.9 logic.dll   -> full chain + guard  (RECOMMENDED)
-#   ca639936...  dry REV1.9.1 logic.dll    -> only REV1.9.2 guard windows
-#   34e2abd2...  REV1.9.2 already installed -> nothing to do
+#   da62ed73...  stock GOG 1.9 logic.dll    -> full chain + guard  (RECOMMENDED)
+#   34e2abd2...  broken first-press master  -> 3-window repair (machine/checksum/security)
+#   65cff273...  REV1.9.2 already installed -> nothing to do
 # Result equals byte-for-byte the verified master:
-#   34e2abd21c23bbed6f3a328f090f9832ccd67dbf32908492f6ee2f7010a13f86
+#   65cff273d6d2d808b12c9f836e9dbe019cadd5572938e2df63c31fb272898c3a
 # (9 257 984 B; stock 9 253 648 B + appended tail 4336 B version)
 # Full chain = 1.9.1 transfer windows + REV1.9.2 vtable range-guard
 # (cave cave+0x940/0x980, guard imm 0x8DF000) - the same hotfix
 # proven on v1.08.1173 (Schizo/Intercept use-after-free crash).
+# v2: fixed COFF window (machine 0x8664 was clobbered -> 0xc000007b Bad Image),
+#     CheckSum zeroed and Authenticode Security dir zeroed (parity with the
+#     proven 1.08 master). Loader acceptance verified via LoadLibraryEx.
 # ============================================================
 $ErrorActionPreference = 'Stop'
 
-$ShaFinal  = '34e2abd21c23bbed6f3a328f090f9832ccd67dbf32908492f6ee2f7010a13f86'
+$ShaFinal  = '65cff273d6d2d808b12c9f836e9dbe019cadd5572938e2df63c31fb272898c3a'
 $ShaStock  = 'da62ed73b43fafa8af0f25fba0501bff641a0cfd1bfb0d3a0b8777a1b0d99271'
-$ShaDry191 = 'ca63993645348280225c1f0e08749744f247e14d79570ef17cf2e26ccb716eb8'
+$ShaBad192 = '34e2abd21c23bbed6f3a328f090f9832ccd67dbf32908492f6ee2f7010a13f86'
 $SizeStock = 9253648
 
 # --- windows (off, old hex, new hex) stock -> REV1.9.2 ---
 $Windows = @(
-    @{ off = 301; old = '86070098'; new = '00080000' }
+    @{ off = 300; old = '64860700983fbe6a'; new = '64860800003fbe6a' }
     @{ off = 377; old = 'f08d'; new = '008e' }
     @{ off = 840; old = '0000000000000000000000000000000000000000000000'; new = '2e666774350000000010000000f08d000010000000348d' }
     @{ off = 876; old = '00000000'; new = '200000e0' }
@@ -29,6 +32,16 @@ $Windows = @(
     @{ off = 2605889; old = '48c745df00000000'; new = 'e86a266600909090' }
     @{ off = 2606438; old = '48c745df00000000'; new = 'e819256600909090' }
     @{ off = 3465882; old = '894634488b542448'; new = 'e8e1045900909090' }
+    @{ off = 384; old = '633d8d00'; new = '00000000' }
+    @{ off = 464; old = '00068d00102d0000'; new = '0000000000000000' }
+)
+
+# --- repair windows: broken first-press master 34e2abd2 -> verified master ---
+# (that build had machine 0x8664 clobbered to 0x0064 -> 0xc000007b Bad Image)
+$RepairWindows = @(
+    @{ off = 300; old = '64000800003fbe6a'; new = '64860800003fbe6a' }
+    @{ off = 384; old = '633d8d00'; new = '00000000' }
+    @{ off = 464; old = '00068d00102d0000'; new = '0000000000000000' }
 )
 
 # --- appended tail bytes (master region beyond stock length, 4336 B) ---
@@ -97,15 +110,15 @@ if ($Cur -eq $ShaStock) {
     $Mode = 'STOCK'
     $BakName = 'logic.dll.GOG19_stock.bak'
     Write-Host '[OK] recognized stock GOG 1.9 logic.dll (full chain: 1.9.1 + REV1.9.2 guard).'
-} elseif ($Cur -eq $ShaDry191) {
-    if ($Len -ne 9257984) { Write-Host ('[ERROR] dry-1.9.1 size mismatch: ' + $Len); exit 2 }
-    $Mode = 'DRY191'
-    $BakName = 'logic.dll.FagotM2_191dry_before_192.bak'
-    Write-Host '[OK] recognized dry REV1.9.1 logic.dll (applying REV1.9.2 guard windows only).'
+} elseif ($Cur -eq $ShaBad192) {
+    if ($Len -ne 9257984) { Write-Host ('[ERROR] broken-master size mismatch: ' + $Len); exit 2 }
+    $Mode = 'BAD192'
+    $BakName = 'logic.dll.broken192_before_repair.bak'
+    Write-Host '[OK] recognized broken first-press master (repair: machine/checksum/security).'
 } else {
     Write-Host '[ERROR] logic.dll SHA256 unknown to this installer. Nothing was changed.'
     Write-Host ('[INFO] observed SHA256: ' + $Cur)
-    Write-Host '[HINT] This package only accepts stock GOG 1.9 logic.dll (da62ed73...).'
+    Write-Host '[HINT] This package accepts stock GOG 1.9 logic.dll (da62ed73...) or repairs the broken 34e2abd2 master.'
     exit 2
 }
 
@@ -120,7 +133,7 @@ Write-Host ('[OK] backup: ' + $Bak)
 $data = [System.IO.File]::ReadAllBytes($CurrentDll)
 $applied = 0
 $allWins = $Windows
-if ($Mode -eq 'DRY191') { $allWins = @() + $Windows + $TailWindows }
+if ($Mode -eq 'BAD192') { $allWins = $RepairWindows }
 
 foreach ($w in $allWins) {
     $nl = [int]($w.new.Length / 2)

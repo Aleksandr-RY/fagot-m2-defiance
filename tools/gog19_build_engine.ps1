@@ -1,3 +1,7 @@
+﻿# !!! SUPERSEDED 2026-10-28: historical master 34e2abd2 was corrupt (COFF machine byte
+# !!! clobbered -> 0xc000007b Bad Image). Canonical patch definition = windows in
+# !!! installers/v2.0.0_GOG19/INSTALL_LOGIC_v2.0.0_GOG19.ps1 (verified: LoadLibraryEx + both-path rehearsal).
+# !!! Incident: journal/2026-10-28_badimage_machine_byte.md. History only - do NOT rebuild from 34e2abd2.
 # ============================================================
 # GOG19 variant-B engine generator
 # Reads: stock GOG 1.9 logic.dll (da62ed73...) and dry master REV1.9.2

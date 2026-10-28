@@ -1,3 +1,7 @@
+﻿# !!! SUPERSEDED 2026-10-28: historical master 34e2abd2 was corrupt (COFF machine byte
+# !!! clobbered -> 0xc000007b Bad Image). Canonical patch definition = windows in
+# !!! installers/v2.0.0_GOG19/INSTALL_LOGIC_v2.0.0_GOG19.ps1 (verified: LoadLibraryEx + both-path rehearsal).
+# !!! Incident: journal/2026-10-28_badimage_machine_byte.md. History only - do NOT rebuild from 34e2abd2.
 # ============================================================
 #  REV1.9.2 BUILDER
 #  base = REV1.9.1 stable (1.08, sha 29eb0525...)  + 1.9 dry (ca639936...)
