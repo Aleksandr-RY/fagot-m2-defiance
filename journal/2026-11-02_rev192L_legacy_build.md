@@ -104,3 +104,8 @@ SHA `30264904e1d5…`, PE ts 2026-09-14). Наш движок 1.9 его не п
 - The 1.08 branch was added WITHOUT new DLLs: windows were derived from local artifacts (stock d320f848 backup vs logic_FagotM2_BASE.dll 29eb0525 + hotfix master 97958629: 16 windows + tail 4096 + 4 tail windows).
 - All 4 branches rehearsed GREEN byte-for-byte; FagotM2_v2.0.0_GOG19_AUTO.zip (156308 B, sha 21c2a990...) uploaded to the release; notes updated.
 - Per-build packages (GOG19 / GOG1.09old) remain as an explicit choice; CLEAN untouched.
+
+## Update 4: main package renamed per user request
+
+- FagotM2_v2.0.0_GOG19.zip -> FagotM2_v2.0.0_GOG_1.09.1223.zip (asset id 703084869; GitHub does not allow spaces in asset names - underscore used). Notes + SHA table updated to reference the new name. Same bytes (sha 21c2a990... for AUTO unchanged; main 154,384 B sha d0670aa4...).
+- Final release asset set: NEXUS_CLEAN (144,012), GOG1.09old_Sep2026_LEGACY (153,144), GOG19_AUTO (156,308), GOG_1.09.1223 (154,384).
