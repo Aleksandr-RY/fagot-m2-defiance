@@ -91,3 +91,9 @@ SHA `30264904e1d5…`, PE ts 2026-09-14). Наш движок 1.9 его не п
 - Главное методологическое достижение дня: закреплён ВОСПРОИЗВОДИМЫЙ
   перенос пещеры на новые сборки игры (шаблон + IAT + return anchors +
   IMGEND imm) — вся цепочка задокументирована в этом журнале.
+
+## Update 2: naming with game family
+
+- Final user-requested name: FagotM2_v2.0.0_GOG1.09old_Sep2026_LEGACY.zip (asset id 703029380, same bytes, sha unchanged 6362a7a6...).
+- Reason: the exact GOG patch number is not encoded anywhere in the binary (no version resource, PE date 14.09.2026), so the name carries the family (GOG 1.09 old) + compile date. If the friend reports the in-game version, we can stamp it precisely.
+- Repo folder renamed: installers/v2.0.0_GOG1.09old_Sep2026_LEGACY/.
