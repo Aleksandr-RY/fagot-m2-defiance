@@ -13,10 +13,31 @@
 # ============================================================
 $ErrorActionPreference = 'Stop'
 $ModRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$GameRoot = [System.IO.Path]::GetFullPath((Join-Path $ModRoot '..\..'))
 $SS = 'urn:schemas-microsoft-com:office:spreadsheet'
 
-if (-not (Test-Path -LiteralPath (Join-Path $GameRoot 'basis.pak'))) {
+# Expected layout: <game root>\mods\<mod folder>\PREPARE_*.ps1
+# Game root = two levels up (and it must contain basis.pak). If basis.pak is
+# not there, try a few levels further up (some installs nest the game
+# deeper), but never write anything outside the folder of this script.
+$GameRoot = [System.IO.Path]::GetFullPath((Join-Path $ModRoot '..\..'))
+$probe = $GameRoot
+$found = $false
+for ($i = 0; $i -lt 4; $i++) {
+    if (Test-Path -LiteralPath (Join-Path $probe 'basis.pak')) { $GameRoot = $probe; $found = $true; break }
+    $up = Split-Path -Parent $probe
+    if ([string]$up -eq [string]$probe) { break }
+    $probe = [System.IO.Path]::GetFullPath($up)
+}
+
+if (-not $found) {
+    if ((Split-Path -Parent $ModRoot) -match '^(?i)mods$') {
+        Write-Host '[ERROR] Wrong layout: this script runs directly inside mods\.'
+        Write-Host ('        ' + $ModRoot)
+        Write-Host '        The mod (with mod.json) must be ONE folder copied into mods\, e.g.:'
+        Write-Host '        mods\FagotM2_2.0.0_1.0.9_GOG\INSTALL_v2.0.0_GOG19.bat   <- run it from here'
+        Write-Host '        Nothing was patched. Fix the layout and run again.'
+        exit 5
+    }
     throw ('Game root not found (no basis.pak): ' + $GameRoot)
 }
 Write-Host ('[INFO] mod root: ' + $ModRoot)
