@@ -97,3 +97,10 @@ SHA `30264904e1d5…`, PE ts 2026-09-14). Наш движок 1.9 его не п
 - Final user-requested name: FagotM2_v2.0.0_GOG1.09old_Sep2026_LEGACY.zip (asset id 703029380, same bytes, sha unchanged 6362a7a6...).
 - Reason: the exact GOG patch number is not encoded anywhere in the binary (no version resource, PE date 14.09.2026), so the name carries the family (GOG 1.09 old) + compile date. If the friend reports the in-game version, we can stamp it precisely.
 - Repo folder renamed: installers/v2.0.0_GOG1.09old_Sep2026_LEGACY/.
+
+## Update 3: AUTO installer
+
+- User asked for an AUTO installer. Written in PowerShell: one file, detects the build by SHA256 of logic.dll, four branches: 1223, legacy Sep2026, 1.08.1173, and the broken-1223 repair.
+- The 1.08 branch was added WITHOUT new DLLs: windows were derived from local artifacts (stock d320f848 backup vs logic_FagotM2_BASE.dll 29eb0525 + hotfix master 97958629: 16 windows + tail 4096 + 4 tail windows).
+- All 4 branches rehearsed GREEN byte-for-byte; FagotM2_v2.0.0_GOG19_AUTO.zip (156308 B, sha 21c2a990...) uploaded to the release; notes updated.
+- Per-build packages (GOG19 / GOG1.09old) remain as an explicit choice; CLEAN untouched.
