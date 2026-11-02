@@ -1,0 +1,15 @@
+{
+  "mod_version": "2.0.0",
+  "engine_revision": "REV1.9.2L (legacy GOG compile)",
+  "target_build": "GOG Terminator: Dark Fate - Defiance, OLDER 1.09 compile (PE timestamp 14.09.2026), logic.dll 9,212,928 B",
+  "logic_stock_sha256": "30264904e1d5199b954bafbd7828cf7190930c246d35fa7b94eefa915e8f0c38",
+  "logic_final_sha256": "c6e59f19efb589b77d3d9c8b2bcf2241f2e85e3893ad61e2b7be8dcac73f127d",
+  "logic_final_size": 9217024,
+  "result_layout": "stock + appended .fgt5 cave 4096 B (raw 0x8C9400, VA 0x8D8000); NumberOfSections 7->8; SizeOfImage 0x8D8000->0x8D9000",
+  "cave_template": "rev192 (proven on 1.08 and 1.9) with per-build constants: IMGEND imm 0x8D8000 x10; IAT disps fflush 0x6D5B88, fwrite 0x6D5B90, fopen_s 0x6D5BB0, fclose 0x6D5BC0; return-to-text 0x34A570",
+  "trampolines": "4 sites, unique 32-byte context match: raw 2603371 (0x27B96B), 2603921 (0x27BB91), 2604470 (0x27BDB6), 3453002 (0x34B04A)",
+  "verification": "LoadLibraryEx(DONT_RESOLVE_DLL_REFERENCES) OK; installer rehearsal stock->master byte-for-byte, idempotent re-run OK; diff vs stock kept to 6 header windows + 4 trampolines + tail",
+  "restore": "RESTORE_GOG19_LEGACY.bat (logic.dll.GOG19legacy_stock.bak)",
+  "packaging": "FagotM2_v2.0.0_GOG19_LEGACY.zip (prebuilt with working PREPARE); repo copies are password-placeholder",
+  "warning": "This package refuses the current 1.09.1223 stock (da62ed73). Use the main GOG19 package for that build."
+}
