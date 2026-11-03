@@ -56,10 +56,26 @@ function Find-7Zip {
         $p = Join-Path $pf86 '7-Zip\7z.exe'
         if (Test-Path -LiteralPath $p) { [void]$candidates.Add([string]$p) }
     }
+    $lad = ${env:LocalAppData}
+    if ($lad) {
+        $p = Join-Path $lad 'Programs\7-Zip\7z.exe'
+        if (Test-Path -LiteralPath $p) { [void]$candidates.Add([string]$p) }
+    }
+    foreach ($rk in @('HKLM:\SOFTWARE\7-Zip', 'HKLM:\SOFTWARE\WOW6432Node\7-Zip', 'HKCU:\SOFTWARE\7-Zip')) {
+        try {
+            $kv = Get-ItemProperty -LiteralPath $rk -ErrorAction Stop
+            foreach ($vn in @('Path', 'Path64', 'InstallPath')) {
+                if ($kv.PSObject.Properties.Name -contains $vn) {
+                    $p = Join-Path ([string]$kv.$vn) '7z.exe'
+                    if (Test-Path -LiteralPath $p) { [void]$candidates.Add([string]$p) }
+                }
+            }
+        } catch { }
+    }
     foreach ($candidate in $candidates) {
         if ($candidate -and (Test-Path -LiteralPath $candidate)) { return [string]$candidate }
     }
-    throw '7z.exe not found. Install 7-Zip or add it to PATH.'
+    throw '7z.exe not found. Searched: PATH, Program Files, Program Files (x86), LocalAppData\Programs\7-Zip, registry (HKLM/HKCU 7-Zip). Install 7-Zip from https://www.7-zip.org or add 7z.exe to PATH.'
 }
 $Seven = [string](Find-7Zip)
 Write-Host ('[OK] 7-Zip: ' + $Seven)
